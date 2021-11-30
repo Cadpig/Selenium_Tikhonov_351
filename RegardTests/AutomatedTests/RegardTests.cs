@@ -25,17 +25,15 @@ namespace AutomatedTests
         [Test]
         public void TestPriceFilter()
         {
-            driver.FindElement(By.XPath("//li[@class='container   '][1]/a")).Click();
-            driver.FindElement(By.XPath("//li[@class='container    open']/ul/li[1]/a[@class='red']")).Click();
+            driver.FindElement(By.XPath("//ul[contains(@class,'menu')]/li[contains(@class, 'container')][1]/a")).Click();
+            driver.FindElement(By.XPath("//li[contains(@class, 'container')][contains(@class, 'open')]/ul/li[1]/a[@class='red']")).Click();
             driver.FindElement(By.XPath("//span[@id='bold-2']/span")).Click();
-            driver.FindElement(By.XPath("//input[@id='filter_value_digital_min_2']")).Clear();
-            driver.FindElement(By.XPath("//input[@id='filter_value_digital_min_2']")).SendKeys("1000");
-            driver.FindElement(By.XPath("//input[@id='filter_value_digital_max_2']")).Clear();
-            driver.FindElement(By.XPath("//input[@id='filter_value_digital_max_2']")).SendKeys("10000");
-
+            driver.FindElement(By.XPath("//div[@id='block_2']/input[contains(@id, 'filter_value_digital_min')]")).Clear();
+            driver.FindElement(By.XPath("//div[@id='block_2']/input[contains(@id, 'filter_value_digital_min')]")).SendKeys("1000");
+            driver.FindElement(By.XPath("//div[@id='block_2']/input[contains(@id, 'filter_value_digital_max')]")).Clear();
+            driver.FindElement(By.XPath("//div[@id='block_2']/input[contains(@id, 'filter_value_digital_max')]")).SendKeys("10000");
             new WebDriverWait(driver, TimeSpan.FromSeconds(3))
                 .Until(x => driver.FindElements(By.XPath("//span[@id='finger']/a")).Any());
-
             driver.FindElement(By.XPath("//span[@id='finger']/a")).Click();
 
             int[] actualValues = Array.ConvertAll(driver.FindElements(By.XPath("//*[contains(@class,'price')]/*[not(contains(@class,'basket_button_class'))]"))
@@ -47,8 +45,8 @@ namespace AutomatedTests
         [Test]
         public void TestTooltipText()
         {
-            new Actions(driver).MoveToElement(driver.FindElement(By.XPath("//span[@id='basket_button_324861']/*"))).Build().Perform();
-            Assert.AreEqual("Добавить в корзину", driver.FindElement(By.XPath("//span[@id='basket_button_324861']/a")).GetAttribute("title").Trim(),
+            new Actions(driver).MoveToElement(driver.FindElement(By.XPath("//span/a[contains(@class, 'cart')]"))).Build().Perform();
+            Assert.AreEqual("Добавить в корзину", driver.FindElement(By.XPath("//span/a[contains(@class, 'cart')]")).GetAttribute("title").Trim(),
                 "Tooltip has not appeared.");
             //тултипы на данном сайте не являются css
         }
@@ -56,13 +54,13 @@ namespace AutomatedTests
         [Test]
         public void NegativeSignUpTest()
         {
-            driver.FindElement(By.XPath("//li[@class='persona ']/span")).Click();
+            driver.FindElement(By.XPath("//span/span[@class='login']")).Click();
             driver.FindElement(By.XPath("//div[1]/span[@id='persona_regShowButton']")).Click();
-            driver.FindElement(By.XPath("//input[@id='new_password1']")).SendKeys("12345");
+            driver.FindElement(By.XPath("//input[contains(@id, 'new_password')]")).SendKeys("12345");
             driver.FindElement(By.XPath("//input[@id='persona_inputName']")).SendKeys("Vitaly");
             driver.FindElement(By.XPath("//input[@id='persona_inputPhone']")).SendKeys("89789234565");
             driver.FindElement(By.XPath("//button[@id='persona_regButton']")).Click();
-            Assert.IsTrue(driver.FindElements(By.XPath("//div[@id='personaSubForm']/*[contains(@class, 'input_likeBootstrap requireField_notFilled')]")).Any(),
+            Assert.IsTrue(driver.FindElements(By.XPath("//div[@id='personaSubForm']/*[contains(@class, 'input_likeBootstrap')][contains(@class, 'requireField_notFilled')]")).Any(),
                 "E-mail confirmation button is enabled when e-mail input has no value.");
             //не пишу электронную почту, так как на данном сайте регистрация возможна без номера телефона
         }
