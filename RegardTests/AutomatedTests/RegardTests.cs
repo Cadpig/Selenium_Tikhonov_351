@@ -27,7 +27,7 @@ namespace AutomatedTests
         {
             driver.FindElement(By.XPath("//ul[contains(@class,'menu')]/li[contains(@class, 'container')][1]/a")).Click();
             driver.FindElement(By.XPath("//li[contains(@class, 'container')][contains(@class, 'open')]/ul/li[1]/a[@class='red']")).Click();
-            driver.FindElement(By.XPath("//span[@id='bold-2']/span")).Click();
+            driver.FindElement(By.XPath("//div[contains(@class, 'filter')]//span[contains(text(), 'Цена, руб')]")).Click();
             driver.FindElement(By.XPath("//div[@id='block_2']/input[contains(@id, 'filter_value_digital_min')]")).Clear();
             driver.FindElement(By.XPath("//div[@id='block_2']/input[contains(@id, 'filter_value_digital_min')]")).SendKeys("1000");
             driver.FindElement(By.XPath("//div[@id='block_2']/input[contains(@id, 'filter_value_digital_max')]")).Clear();
@@ -55,7 +55,7 @@ namespace AutomatedTests
         public void NegativeSignUpTest()
         {
             driver.FindElement(By.XPath("//span/span[@class='login']")).Click();
-            driver.FindElement(By.XPath("//div[1]/span[@id='persona_regShowButton']")).Click();
+            driver.FindElement(By.XPath("//span[@id='persona_regShowButton']")).Click();
             driver.FindElement(By.XPath("//input[contains(@id, 'new_password')]")).SendKeys("12345");
             driver.FindElement(By.XPath("//input[@id='persona_inputName']")).SendKeys("Vitaly");
             driver.FindElement(By.XPath("//input[@id='persona_inputPhone']")).SendKeys("89789234565");
