@@ -48,7 +48,6 @@ namespace AutomatedTests
             new Actions(driver).MoveToElement(driver.FindElement(By.XPath("//span/a[contains(@class, 'cart')]"))).Build().Perform();
             Assert.AreEqual("Добавить в корзину", driver.FindElement(By.XPath("//span/a[contains(@class, 'cart')]")).GetAttribute("title").Trim(),
                 "Tooltip has not appeared.");
-            //тултипы на данном сайте не являются css
         }
 
         [Test]
@@ -62,7 +61,6 @@ namespace AutomatedTests
             driver.FindElement(By.XPath("//button[@id='persona_regButton']")).Click();
             Assert.IsTrue(driver.FindElements(By.XPath("//div[@id='personaSubForm']/*[contains(@class, 'input_likeBootstrap')][contains(@class, 'requireField_notFilled')]")).Any(),
                 "E-mail confirmation button is enabled when e-mail input has no value.");
-            //не пишу электронную почту, так как на данном сайте регистрация возможна без номера телефона
         }
 
         [TearDown]
